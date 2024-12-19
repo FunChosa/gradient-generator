@@ -1,0 +1,136 @@
+.container {
+  width: 100%;
+  min-width: 300px;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 360px auto;
+  background-color: #fff;
+}
+
+h1 {
+  color: #1d1d1d;
+}
+
+h2 {
+  color: #1d1d1d;
+}
+
+.gradient-type {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+}
+
+.gradient-type button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  background: #1d1d1d;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, rgba(0, 0, 0, 0.15) 0px 8px 16px;
+}
+
+.gradient-type button.active {
+  background: #ffc62f;
+  color: #1d1d1d;
+}
+
+.gradient-type button:hover {
+  background: #ffc62f;
+  color: #1d1d1d;
+}
+
+.gradient-generator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.colors {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  list-style: none;
+}
+
+.direction {
+  cursor: pointer;
+  display: flex;
+  text-align: center;
+  padding: 15px 10px;
+  border-radius: 5px;
+  background: #1d1d1d;
+  color: #fff;
+  width: 4rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.direction.active {
+  background: #ffc62f;
+  color: #1d1d1d;
+}
+
+.gradient-css {
+  border: 1px solid #a6a6a6;
+  padding: 0.5rem;
+  border-radius: 5px;
+  text-align: center;
+  width: 100%;
+  font-size: 16px;
+}
+
+.copy-btn {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  background: #1d1d1d;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, rgba(0, 0, 0, 0.15) 0px 8px 16px;
+}
+
+.copy-btn:hover {
+  background: #ffc62f;
+  color: #1d1d1d;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #1d1d1d;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .preview-container {
+    width: 100%;
+    height: 50vh;
+  }
+}
