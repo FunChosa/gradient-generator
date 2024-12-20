@@ -21,14 +21,6 @@ const CssPicker = ({ gradientCss, copied, setCopied }) => {
       >
         {copied ? "Copied!" : "Copy"} <FaRegCopy />
       </button>
-      <button
-        className="download-btn"
-        onClick={() => {
-          navigator.clipboard.writeText(gradientCss);
-        }}
-      >
-        Download
-      </button>
     </>
   );
 };
