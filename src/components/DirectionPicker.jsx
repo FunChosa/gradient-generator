@@ -7,12 +7,16 @@ const DirectionPicker = ({ directions, currentDirection, setDirection }) => {
       {directions.map((dir) => (
         <li
           key={dir.name}
-          onClick={() => setDirection(dir.name)}
-          className={`direction ${
+          onClick={() => dir.name !== "center" && setDirection(dir.name)}
+          className={`direction-btn ${
             dir.name === currentDirection ? "active" : ""
           }`}
         >
-          <FaArrowRightLong style={{ transform: `rotate(${dir.rotate}deg)` }} />
+          {dir.name !== "center" && (
+            <FaArrowRightLong
+              style={{ transform: `rotate(${dir.rotate}deg)` }}
+            />
+          )}
         </li>
       ))}
     </ul>

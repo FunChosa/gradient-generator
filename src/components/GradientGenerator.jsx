@@ -1,80 +1,70 @@
 import React, { useEffect, useState } from "react";
 import ColorPicker from "./ColorPicker";
 import DirectionPicker from "./DirectionPicker";
-import Preview from "./Preview";
-import { DIRECTIONS } from "../constants";
+import {
+  DIRECTIONS,
+  DEFAULT_COLORS,
+  DEFAULT_PARTS,
+  DEFAULT_TYPE,
+} from "../constants";
+import TypePicker from "./TypePicker";
+import CssPicker from "./CssPicker";
 
 const GradientGenerator = () => {
-  const [colors, setColors] = useState({
-    start: "#FF0744",
-    end: "#0018FF",
-  });
+  const [colors, setColors] = useState(DEFAULT_COLORS);
+  const [parts, setParts] = useState(DEFAULT_PARTS);
   const [direction, setDirection] = useState(DIRECTIONS[0].name);
-  const [gradientType, setGradientType] = useState("linear");
+  const [type, setType] = useState(DEFAULT_TYPE);
+  const [copied, setCopied] = useState(false);
+
   const [gradientCss, setGradientCss] = useState(
-    `${gradientType}-gradient(${direction}, ${colors.start}, ${colors.end})`
+    `${type}-gradient(${direction}, ${colors.start} ${parts.start}%, ${colors.end} ${parts.end}%)`
   );
-  const [parts, setParts] = useState({
-    start: "0",
-    end: "100",
-  });
 
   useEffect(() => {
     setGradientCss(
-      `${gradientType}-gradient(${direction}, ${colors.start} ${parts.start}%, ${colors.end} ${parts.end}%)`
+      `${type}-gradient(${direction}, ${colors.start} ${parts.start}%, ${colors.end} ${parts.end}%)`
     );
-  }, [colors, direction, parts, gradientType]);
+  }, [colors, direction, parts, type]);
 
   return (
     <>
-      <div className="gradient-generator">
+      <div className="gradient-container">
         <h1>Gradient Generator</h1>
-        <div className="gradient-type">
-          <button
-            className={`${gradientType === "linear" ? "active" : ""}`}
-            onClick={() => {
-              setGradientType("linear");
-              setDirection(DIRECTIONS[0].name);
-            }}
-          >
-            Linear
-          </button>
-          <button
-            className={`${gradientType === "radial" ? "active" : ""}`}
-            onClick={() => {
-              setGradientType("radial");
-              setDirection("circle");
-            }}
-          >
-            Radial
-          </button>
-        </div>
+        <TypePicker
+          DIRECTIONS={DIRECTIONS}
+          type={type}
+          setType={setType}
+          setDirection={setDirection}
+        />
         <ColorPicker
           colors={colors}
           setColors={setColors}
           parts={parts}
           setParts={setParts}
         />
-        {gradientType === "linear" && (
-          <DirectionPicker
-            directions={DIRECTIONS}
-            currentDirection={direction}
-            setDirection={setDirection}
-          />
+        {type === "linear" && (
+          <div className="gradient-direction">
+            <h2>Direction</h2>
+            <DirectionPicker
+              directions={DIRECTIONS}
+              currentDirection={direction}
+              setDirection={setDirection}
+            />
+          </div>
         )}
-        <textarea
-          type="text"
-          value={gradientCss}
-          className="gradient-css"
-          onChange={(e) => {
-            setGradientCss(e.target.value);
-          }}
+        <CssPicker
+          gradientCss={gradientCss}
+          copied={copied}
+          setCopied={setCopied}
         />
-        <button className="copy-btn">Copy</button>
       </div>
-      <div className="preview-container">
-        <Preview gradientCss={gradientCss} />
-      </div>
+      <div
+        className="preview-container"
+        style={{
+          background: gradientCss,
+        }}
+      />
     </>
   );
 };

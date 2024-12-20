@@ -2,56 +2,49 @@ import React from "react";
 import { SketchPicker } from "react-color";
 
 const ColorPicker = ({ colors, setColors, parts, setParts }) => {
+  const colorsArray = [
+    {
+      title: "Color #1",
+      value: "start",
+      color: colors.start,
+      parts: parts.start,
+    },
+    {
+      title: "Color #2",
+      value: "end",
+      color: colors.end,
+      parts: parts.end,
+    },
+  ];
+
   return (
-    <div className="colors">
-      <h2>Color #1</h2>
-      <SketchPicker
-        color={colors.start}
-        onChange={(color) => setColors({ ...colors, start: color.hex })}
-        width="300px"
-        disableAlpha
-        presetColors={[]}
-      />
-      <div className="slider">
-        <p className="label" style={{ fontWeight: 500 }}>
-          {parts.start}%
-        </p>
-        <div className="slider-bar" />
-        <input
-          type="range"
-          min="0"
-          max="100"
-          style={{ width: "100%" }}
-          defaultValue={parts.start}
-          onChange={(e) =>
-            setParts({ ...parts, start: `${e.currentTarget.value}` })
-          }
-        />
-      </div>
-      <h2>Color #2</h2>
-      <SketchPicker
-        color={colors.end}
-        onChange={(color) => setColors({ ...colors, end: color.hex })}
-        width="300px"
-        disableAlpha
-        presetColors={[]}
-      />
-      <div className="slider">
-        <p className="label" style={{ fontWeight: 500 }}>
-          {parts.end}%
-        </p>
-        <div className="slider-bar" />
-        <input
-          type="range"
-          min="0"
-          max="100"
-          style={{ width: "100%" }}
-          defaultValue={parts.end}
-          onChange={(e) =>
-            setParts({ ...parts, end: `${e.currentTarget.value}` })
-          }
-        />
-      </div>
+    <div className="gradient-colors">
+      {colorsArray.map((el) => (
+        <React.Fragment key={el.value}>
+          <h2>{el.title}</h2>
+          <SketchPicker
+            color={el.color}
+            onChange={(color) =>
+              setColors({ ...colors, [el.value]: color.hex })
+            }
+            width="300px"
+            disableAlpha
+            presetColors={[]}
+          />
+          <div className="slider">
+            <p className="label">{el.parts}%</p>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              defaultValue={el.parts}
+              onChange={(e) =>
+                setParts({ ...parts, [el.value]: `${e.currentTarget.value}` })
+              }
+            />
+          </div>
+        </React.Fragment>
+      ))}
     </div>
   );
 };
